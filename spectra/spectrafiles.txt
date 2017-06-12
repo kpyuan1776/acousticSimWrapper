@@ -1,0 +1,6 @@
+put files of spectra for
+1) hb_spectra.mat contains a matrix hg_spectra with Hb and HbO2 as 376x3 [wavelength; Hb; HbO2]
+2) fat_spectra.mat contains a matrix fat_spectra  670x2
+3) water_spectra.mat contains a matrix water_spectra.mat 425x2
+
+these can be downloaded from http://omlc.org/spectra/hemoglobin/index.html

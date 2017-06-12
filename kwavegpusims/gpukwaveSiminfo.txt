@@ -1,0 +1,2 @@
+download kwave GPU simulation executables for corresponding operating system:
+http://www.k-wave.org/download.php

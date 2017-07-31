@@ -16,12 +16,16 @@ dev = DeviceInfo('sim_handheldAcuity');
 %%
 
 vessel_img = 1-loadImage(vesselimg);
-vessel_img(:,86:88) = 0;
+vessel_img(:,86:88) = 0; %make it quadratic
 figure;imagesc(vessel_img);colormap gray;
 
-%%
+%% the 512x512x32 grid takes 180s to simulate on GPU and 512x512x20 around 100s
+
 asim = AcousticSim(dev);
+
 asim = asim.setSystem_Handheld();
+asim.Nz = 20; %the simulation needs a perfectly matched layer also in z-direction to perform a 3D simulation
+asim = makeSimGrid(asim,asim.Nx,asim.Ny,asim.Nz);
 
 asim = asim.setSensorMask_forGPU_mod();
 asim.path_to_file = '';
@@ -37,7 +41,9 @@ asim = asim.prepareSimulationGPU(vessel_img,1,filename);
 
 %% reconstruction
 % needs: calculate_matrix_highpass_1.m
-% 
+%  Calculate_MatrixMB_Luis.m
+%  lsqr_b.m
+%  nnls_conjgrad_armijo.m
 
 num_sensor_points = size(sensor_data,1);
 time_kwave_pad = time_kwave;

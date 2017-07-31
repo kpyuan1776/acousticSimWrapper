@@ -48,7 +48,7 @@ classdef AcousticSim
         end
         
         %Nx=Ny=256, Nz=96
-        function obj = makeSimGrid(obj,n,Nx,Ny,Nz)
+        function obj = makeSimGrid(obj,Nx,Ny,Nz)
 
             if mod(Nx,2)
                 Nx = Nx+1;
@@ -140,8 +140,6 @@ classdef AcousticSim
             sensor_radius = obj.devInfo.r_sensor;%11e-3;     % [m]
             ang_ini = obj.devInfo.angle_sensor(1);%-0.7853981633;
             ang_end = obj.devInfo.angle_sensor(end);%3.926990817079;
-            % ang_step = dev.angle_sensor(2)-dev.angle_sensor(1);%0.0184799567858;
-            % angle_sensor = dev.angle_sensor;%[ang_ini:ang_step:ang_end];
             sensor_angle = abs(ang_end - ang_ini);
             
             sensor_pos = [0, 0];        % [m]
@@ -266,7 +264,7 @@ classdef AcousticSim
             
             p0_init = repmat(p0, [1, 1, obj.slice_thickness]);
             p0_init = padarray(p0_init, [pad_x, pad_y, pad_z], 'both');
-            p0_init = p0_init;
+           % p0_init = p0_init;
             obj.source.p0 = p0_init;
             
             % input arguments
